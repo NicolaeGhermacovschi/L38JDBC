@@ -37,7 +37,9 @@ public class JDBC {
 
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+          //  System.out.println(e.getMessage());
+            System.out.println("problea e aici");
+            e.printStackTrace();
         }
     }
 
@@ -71,18 +73,15 @@ public class JDBC {
         if (conn != null) {
             Scanner sc = new Scanner(System.in);
 
-            System.out.println("Enter ID employe :");
-            int id = sc.nextInt();
+                System.out.println("Enter ID employe for Delete:");
+                int id = sc.nextInt();
+                String comand =  "DELETE FROM employee WHERE employee_id = " + id;
+                int rs = statement.executeUpdate(comand);
+                if (rs > 0 ) System.out.println("Success Delete");
+                else System.out.println("Delete Failed");
+
             sc.close();
 
-            boolean rs = false;
-
-                rs = statement.execute("DELETE FROM employee WHERE employee_id = " + id + ";");
-
-
-
-            if (!rs) System.out.println("Success Delete");
-            else System.out.println("Delete Failed");
         } else {
             System.out.println(" Not Connected from DELETE ");
         }
@@ -92,7 +91,7 @@ public class JDBC {
         if (conn != null) {
             Scanner sc = new Scanner(System.in);
 
-            System.out.println("Enter ID employe :");
+            System.out.println("Enter ID employe for update :");
             int id = sc.nextInt();
             System.out.println("Enter Adress :");
             String address = sc.next();

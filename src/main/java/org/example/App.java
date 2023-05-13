@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.JDBC.JDBC;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class App {
@@ -10,10 +11,13 @@ public class App {
         System.out.println("Hello World!\n");
         JDBC jdbc = new JDBC();
 
-        Scanner sc = new Scanner(System.in);
 
-        int ch;
+
+
+        Scanner sc = new Scanner(System.in);
+        int ch  = -1;
         do {
+
             System.out.println("===============================");
             System.out.println("|1| show data                   |");
             System.out.println("|2| add new employee            |");
@@ -24,17 +28,20 @@ public class App {
             System.out.println("===============================");
             System.out.print("=>");
 
-            ch = sc.nextInt();
-            jdbc.menuSQL(ch);
-//            try {
-//
-//                jdbc.menuSQL(ch);
-//            } catch (RuntimeException e) {
-//                System.out.println(e.getMessage());
-//            }
-        } while (ch != 0);
+            while (!sc.hasNextInt()) {
+                if (sc.hasNext()) {
+                    System.out.println("Acesta nu este un numar. Incercati din nou");
+                    sc.next();
+                }
+            }
 
+            ch = sc.nextInt();
+            System.out.println("ch new is : " + ch);
+            jdbc.menuSQL(ch);
+
+        } while (ch != 0);
         sc.close();
+
 
     }
 }
